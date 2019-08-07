@@ -36,9 +36,21 @@ var startWith=function(str,s){
    }
 
 exports.startTrim=(str,start) =>{
-    if(startWith(str,start) && start){
-        //console.log(str, start)
-       return str.substring(start.length)
+    var array = []
+    if(Type.isArray(start)){
+        array = start
+    }
+    else
+    {
+        array.push(start)
+    }
+
+    for(var i =0 ;i < array.length;i++){
+        var s = array[i]
+        if(startWith(str,s) && s){
+            //console.log(str, start)
+            return str.substring(s.length)
+        }
     }
     return str
  }
