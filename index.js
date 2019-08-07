@@ -37,7 +37,7 @@ var startWith=function(str,s){
 
 exports.startTrim=(str,start) =>{
     if(startWith(str,start) && start){
-        console.log(str, start)
+        //console.log(str, start)
        return str.substring(start.length)
     }
     return str
