@@ -135,6 +135,26 @@ exports.ArrayContains = (array,one, compareFn) =>{
     return exports.ArrayIndexOf(array,one,compareFn) > -1
 }
 
+exports.ArrayEquals =( array1,array2,compareFn)=>{
+    if(array1.length !=array2.length){
+        return false
+    }
+    array1.sort(compareFn)
+    array2.sort(compareFn)
+    for(var i = 0;i<array1.length;i++){
+        if(compareFn){
+            if(!compareFn(array1[i],array2[i])){
+                return false
+            }
+        }else{
+            if(array1[i]!=array2[i]){
+                return false
+            }
+        }
+    }
+    return true
+}
+
 exports.ArrayIndexOf = (array,one, compareFn) =>{
     for(var i =0 ;i< array.length;i++){
         element= array[i]
