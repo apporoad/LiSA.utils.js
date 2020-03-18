@@ -171,3 +171,27 @@ exports.ArrayIndexOf = (array,one, compareFn) =>{
     }
     return -1 
 }
+
+
+exports.ArraySort = (array, compareFn) =>{
+    return  array.sort(compareFn)
+}
+
+exports.ArrayDistinct = (array,compareFn) =>{
+    return array.filter(function(item, index, arr) {
+        return exports.ArrayIndexOf(arr,item,compareFn) === index
+    });
+}
+
+exports.ArrayRemove= (array,arrayOrOneRemoving,compareFn) =>{
+    var newArr= []
+     if(!exports.Type.isArray(arrayOrOneRemoving)){
+          arrayOrOneRemoving = [arrayOrOneRemoving]
+     }
+     array.forEach(element => {
+        if(!exports.ArrayContains(arrayOrOneRemoving,element,compareFn)){
+            newArr.push(element)
+        }
+     })
+     return newArr
+}
