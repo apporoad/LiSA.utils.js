@@ -68,6 +68,16 @@ exports.startTrim=(str,start) =>{
     return str
  }
 
+exports.randUnique = (start, end, size) => {
+	var allNums = new Array;
+	size = size ? (size > end - start ? end - start : size) : 1;
+	for (var i = start, k = 0; i <= end; i++, k++) {
+	allNums[k] = i;
+	}
+	allNums.sort(function(){ return 0.5 - Math.random(); });
+	return allNums.slice(0, size);
+}
+
 exports.Type = Type
 exports.endWith =endWith
 exports.startWith = startWith
