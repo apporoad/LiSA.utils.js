@@ -7,6 +7,9 @@ it('test startTrim',()=>{
     expect(str1).toBe('c/efg/hijk')
     var str2 = utils.startTrim("/abc/efg/hijk","/ab")
     expect(str2).toBe('c/efg/hijk')
+
+    var array = utils.ArrayFilter([{name:'hello'},{name : 'hi'}, {name : 'hello'}] , { name : 'hello'} , (a,b)=>{ return a.name ==b.name})
+    expect(array.length).toBe(2)
 })
 
 

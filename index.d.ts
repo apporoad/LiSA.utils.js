@@ -84,6 +84,8 @@ declare class Utils{
     ArrayDistinct (array : Array<any> ,compareFn ? : Function) : Array<any>
 
     ArrayRemove (array : Array<any>,arrayOrOneRemoving,compareFn ? : Function) : Array<any>
+
+    ArrayFilter ( array : Array<any>,one : any, compareFn? :Function) : Array<any>
 }
 
 

@@ -182,6 +182,21 @@ exports.ArrayIndexOf = (array,one, compareFn) =>{
     return -1 
 }
 
+exports.ArrayFilter = ( array,one,compareFn) =>{
+    var newArr = []
+    for(var i=0;i<array.length ;i ++){
+        var element = array[i]
+        if(compareFn){
+            if(compareFn(one,element)){
+                newArr.push(element)
+            }
+        }else if ( one == element){
+            newArr.push(element)
+        }
+    }
+    return newArr
+}
+
 
 exports.ArraySort = (array, compareFn) =>{
     return  array.sort(compareFn)

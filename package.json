@@ -1,6 +1,6 @@
 {
   "name": "lisa.utils",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "tiny utils",
   "main": "index.js",
   "scripts": {
