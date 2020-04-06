@@ -12,7 +12,15 @@ it('test startTrim',()=>{
     expect(array.length).toBe(2)
 })
 
-
+it('test deepCopy' , ()=>{
+    var obj1 = { hi : { hello : 1}}
+    var obj2 = { hello : { hi : 3}}
+    obj1.next = obj2
+    obj2.next = obj1
+    var obj3 = utils.deepCopy(obj1)
+    obj3.hi.hello = 3
+    expect(obj1.hi.hello *3 == obj3.hi.hello).toBeTruthy()
+})
 
 // var afun = async (abc) =>{}
 

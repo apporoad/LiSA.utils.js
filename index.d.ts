@@ -86,6 +86,8 @@ declare class Utils{
     ArrayRemove (array : Array<any>,arrayOrOneRemoving,compareFn ? : Function) : Array<any>
 
     ArrayFilter ( array : Array<any>,one : any, compareFn? :Function) : Array<any>
+
+    deepCopy( obj : Object) :Object
 }
 
 
