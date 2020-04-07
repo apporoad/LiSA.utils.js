@@ -45,18 +45,18 @@ declare class Utils{
     /**
      * 
      * @param str 
-     * @param end string 或者 string[]
+     * @param end  string 或者 string[] default is string.blank
      */
-    endTrim (str:string,end : string) : string
+    endTrim (str:string,end? : string) : string
 
     startWith (originStr : string , startStr: string) : boolean
 
     /**
      * 
      * @param str 
-     * @param start string 或者 string[]
+     * @param start  string 或者 string[]   default is string.blank
      */
-    startTrim (str:string,start :string) : string
+    startTrim (str:string,start? :string) : string
 
     /**
      * 生成不重复的随机整数 randUnique(0,100,4)

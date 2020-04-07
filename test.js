@@ -4,12 +4,22 @@ var utils = require("./index")
 it('test startTrim',()=>{
 
     var str1 = utils.startTrim("/abc/efg/hijk",[ "g","/ab","c/ef"])
-    expect(str1).toBe('c/efg/hijk')
+    expect(str1).toBe('/hijk')
     var str2 = utils.startTrim("/abc/efg/hijk","/ab")
     expect(str2).toBe('c/efg/hijk')
 
     var array = utils.ArrayFilter([{name:'hello'},{name : 'hi'}, {name : 'hello'}] , { name : 'hello'} , (a,b)=>{ return a.name ==b.name})
     expect(array.length).toBe(2)
+})
+
+it('test endTrim', ()=>{
+    var str1 = utils.endTrim('aaaabbbb', 'b')
+    var str2 = utils.endTrim('abc      ')
+    var str3 = utils.endTrim('zzzabccba' , ['a','b','c'])
+    
+    expect(str1).toBe('aaaa')
+    expect(str2).toBe('abc')
+    expect(str3).toBe('zzz')
 })
 
 it('test deepCopy' , ()=>{

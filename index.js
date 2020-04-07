@@ -21,6 +21,8 @@ var endWith = function (str, s) {
 }
 
 exports.endTrim = (str, end) => {
+    end = end || ' '
+    var result =str
     var array = []
     if (Type.isArray(end)) {
         array = end
@@ -33,10 +35,13 @@ exports.endTrim = (str, end) => {
         var s = array[i]
         if (endWith(str, s) && s) {
             //console.log(str, start)
-            return str.substring(0, str.length - s.length)
+            result = str.substring(0, str.length - s.length)
         }
     }
-    return str
+    if(result == str){
+        return  result
+    }
+    return exports.endTrim(result,end)
 }
 var startWith = function (str, s) {
     if (s == null || s == "" || str == null || str == "" || str.length == 0 || s.length > str.length)
@@ -48,6 +53,8 @@ var startWith = function (str, s) {
 }
 
 exports.startTrim = (str, start) => {
+    start = start || ' '
+    var result = str
     var array = []
     if (Type.isArray(start)) {
         array = start
@@ -60,10 +67,13 @@ exports.startTrim = (str, start) => {
         var s = array[i]
         if (startWith(str, s) && s) {
             //console.log(str, start)
-            return str.substring(s.length)
+            result = str.substring(s.length)
         }
     }
-    return str
+    if(result == str){
+        return result
+    }
+    return exports.startTrim(result,start)
 }
 
 exports.randUnique = (start, end, size) => {
