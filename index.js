@@ -206,7 +206,17 @@ exports.ArrayFilter = (array, one, compareFn) => {
 
 
 exports.ArraySort = (array, compareFn) => {
-    return array.sort(compareFn)
+    if(compareFn){
+        return array.sort((a,b)=>{
+            var result = compareFn(a,b)
+            if(Type.isNumber(result))
+                return result
+            else
+                return result ? 1 : -1
+        })
+    }else{
+        return array.sort()
+    }
 }
 
 exports.ArrayDistinct = (array, compareFn) => {

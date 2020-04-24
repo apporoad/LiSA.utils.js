@@ -32,6 +32,15 @@ it('test deepCopy' , ()=>{
     expect(obj1.hi.hello *3 == obj3.hi.hello).toBeTruthy()
 })
 
+it('test sort' , ()=>{
+    var array = [
+        { id :1, name : '1'},
+        { id :2, name : '2'},
+        { id :0, name : '0'},
+    ]
+    expect(utils.ArraySort(array,(a,b)=>{ a.id > b.id})[0].id).toBe(0)
+})
+
 // var afun = async (abc) =>{}
 
 // console.log(utils.Type.isAsyncFunction(afun))
