@@ -240,7 +240,7 @@ exports.deepCopy = (obj) => {
         if (existobj) {
             return existobj;
         }
-        result = {}
+        result = Array.isArray(obj) ? [] : {}
         map.set(obj, result);
         for (let i = 0, len = keys.length; i < len; i++) {
             key = keys[i];

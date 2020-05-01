@@ -30,6 +30,13 @@ it('test deepCopy' , ()=>{
     var obj3 = utils.deepCopy(obj1)
     obj3.hi.hello = 3
     expect(obj1.hi.hello *3 == obj3.hi.hello).toBeTruthy()
+
+    var json1 = {
+        hello : [ '1' , '2' , '3']
+    }
+    var json2 = utils.deepCopy(json1)
+    //console.log(json2)
+    expect(json2.hello.length).toBe(3)
 })
 
 // var afun = async (abc) =>{}
