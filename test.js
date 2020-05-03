@@ -1,5 +1,6 @@
 var utils = require("./index")
 
+var it2 = global.debug || it
 
 it('test startTrim',()=>{
 
@@ -46,6 +47,15 @@ it('test sort' , ()=>{
         { id :0, name : '0'},
     ]
     expect(utils.ArraySort(array,(a,b)=>{ return a.id > b.id})[0].id).toBe(0)
+})
+
+it2('test special' , ()=>{
+    var json = {
+        abc : /asdfs/g
+    }
+    var cpJ = utils.deepCopy(json)
+
+    expect(cpJ.abc == json.abc).toBe(true)
 })
 
 // var afun = async (abc) =>{}

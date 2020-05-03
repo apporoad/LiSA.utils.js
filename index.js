@@ -255,7 +255,7 @@ exports.deepCopy = (obj) => {
         for (let i = 0, len = keys.length; i < len; i++) {
             key = keys[i];
             temp = obj[key];
-            if (temp && typeof temp === 'object') {
+            if (Type.isObject(temp)) {
                 result[key] = dp(temp);
             } else {
                 result[key] = temp;
