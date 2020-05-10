@@ -22,12 +22,11 @@ var endWith = function (str, s) {
 
 exports.endTrim = (str, end) => {
     end = end || ' '
-    var result =str
+    var result = str
     var array = []
     if (Type.isArray(end)) {
         array = end
-    }
-    else {
+    } else {
         array.push(end)
     }
 
@@ -38,10 +37,10 @@ exports.endTrim = (str, end) => {
             result = str.substring(0, str.length - s.length)
         }
     }
-    if(result == str){
-        return  result
+    if (result == str) {
+        return result
     }
-    return exports.endTrim(result,end)
+    return exports.endTrim(result, end)
 }
 var startWith = function (str, s) {
     if (s == null || s == "" || str == null || str == "" || str.length == 0 || s.length > str.length)
@@ -58,8 +57,7 @@ exports.startTrim = (str, start) => {
     var array = []
     if (Type.isArray(start)) {
         array = start
-    }
-    else {
+    } else {
         array.push(start)
     }
 
@@ -70,10 +68,10 @@ exports.startTrim = (str, start) => {
             result = str.substring(s.length)
         }
     }
-    if(result == str){
+    if (result == str) {
         return result
     }
-    return exports.startTrim(result,start)
+    return exports.startTrim(result, start)
 }
 
 exports.randUnique = (start, end, size) => {
@@ -82,7 +80,9 @@ exports.randUnique = (start, end, size) => {
     for (var i = start, k = 0; i <= end; i++, k++) {
         allNums[k] = i;
     }
-    allNums.sort(function () { return 0.5 - Math.random(); });
+    allNums.sort(function () {
+        return 0.5 - Math.random();
+    });
     return allNums.slice(0, size);
 }
 
@@ -100,10 +100,9 @@ exports.indexOfString = (str, searchStr) => {
         var re = new RegExp(searchStr.substring(1, searchStr.length - 1), "mg")
         var arr;
         while ((arr = re.exec(str)) != null)
-            return arr.index  //print(arr.index + "-" + arr.lastIndex + "\t" + arr);
+            return arr.index //print(arr.index + "-" + arr.lastIndex + "\t" + arr);
         return -1
-    }
-    else {
+    } else {
         return str.indexOf(searchStr)
     }
 }
@@ -115,8 +114,7 @@ exports.indexOf = (str, search) => {
     }
     if (Type.isString(search)) {
         return indexOfString(str, search)
-    }
-    else if (Type.isNumber(search)) {
+    } else if (Type.isNumber(search)) {
         re = new RegExp(/\n/, "mg")
         var nArr = new Array()
         var temp = null
@@ -127,8 +125,7 @@ exports.indexOf = (str, search) => {
                 return 0
             if (search - 1 < nArr.length) {
                 return nArr[search - 1]
-            }
-            else {
+            } else {
                 //? maybe should know
                 return -1
             }
@@ -141,8 +138,7 @@ exports.indexOf = (str, search) => {
                 return -1
             }
         }
-    }
-    else {
+    } else {
         throw Error('pplugins:util: unsupport search type')
     }
 }
@@ -179,8 +175,7 @@ exports.ArrayIndexOf = (array, one, compareFn) => {
             if (compareFn(one, element)) {
                 return i
             }
-        }
-        else {
+        } else {
             if (one == element) {
                 return i
             }
@@ -206,15 +201,15 @@ exports.ArrayFilter = (array, one, compareFn) => {
 
 
 exports.ArraySort = (array, compareFn) => {
-    if(compareFn){
-        return array.sort((a,b)=>{
-            var result = compareFn(a,b)
-            if(Type.isNumber(result))
+    if (compareFn) {
+        return array.sort((a, b) => {
+            var result = compareFn(a, b)
+            if (Type.isNumber(result))
                 return result
             else
                 return result ? 1 : -1
         })
-    }else{
+    } else {
         return array.sort()
     }
 }
@@ -240,6 +235,7 @@ exports.ArrayRemove = (array, arrayOrOneRemoving, compareFn) => {
 
 exports.deepCopy = (obj) => {
     let map = new WeakMap();
+
     function dp(obj) {
         let result = null;
         let keys = Object.keys(obj);
@@ -266,3 +262,82 @@ exports.deepCopy = (obj) => {
 
     return dp(obj);
 }
+
+
+var ArrayIndexOfAsync = async (array, one, compareFn) => {
+        for (var i = 0; i < array.length; i++) {
+            element = array[i]
+            if (compareFn) {
+                if (await Promise.resolve(compareFn(one, element))) {
+                    return i
+                }
+            } else {
+                if (one == element) {
+                    return i
+                }
+            }
+        }
+        return -1
+    }
+var   ArrayContainsAsync = async (array, one, compareFn) => {
+        return (await ArrayIndexOfAsync(array, one, compareFn)) > -1
+    }
+
+var Async = {
+    ArrayContains: ArrayContainsAsync ,
+    ArrayEquals: async (array1, array2, compareFn) => {
+        if (array1.length != array2.length) {
+            return false
+        }
+        array1.sort(compareFn)
+        array2.sort(compareFn)
+        for (var i = 0; i < array1.length; i++) {
+            if (compareFn) {
+                if (!(await Promise.resolve(compareFn(array1[i], array2[i])))) {
+                    return false
+                }
+            } else {
+                if (array1[i] != array2[i]) {
+                    return false
+                }
+            }
+        }
+        return true
+    },
+    ArrayIndexOf: ArrayIndexOfAsync ,
+    ArrayFilter: async (array, one, compareFn) => {
+        var newArr = []
+        for (var i = 0; i < array.length; i++) {
+            var element = array[i]
+            if (compareFn) {
+                if (await Promise.resolve(compareFn(one, element))) {
+                    newArr.push(element)
+                }
+            } else if (one == element) {
+                newArr.push(element)
+            }
+        }
+        return newArr
+    },
+    ArraySort: async (array, compareFn) => {
+        throw Error('todo')
+    },
+    ArrayDistinct: async (array, compareFn) => {
+        throw Error('todo')
+    },
+    ArrayRemove: async (array, arrayOrOneRemoving, compareFn) => {
+        var newArr = []
+        if (!exports.Type.isArray(arrayOrOneRemoving)) {
+            arrayOrOneRemoving = [arrayOrOneRemoving]
+        }
+        for(var i =0 ;i< array.length;i ++){
+            var element = array[i]
+            if (!(await Promise.resolve(ArrayContainsAsync(arrayOrOneRemoving, element, compareFn)))) {
+                newArr.push(element)
+            }
+        }
+        return newArr
+    }
+}
+
+exports.Async = Async

@@ -24,6 +24,52 @@ declare class Type{
     isAsyncFunction(obj : any) :boolean
 }
 
+/**类声明*/
+declare class Async{
+    /**
+     * 同同步
+     * @param array 
+     * @param one 
+     * @param compareFn 支持同异步function
+     */
+    ArrayContains(array : Array, one , compareFn ? : Promise)  : Promise
+
+    /**
+     * 同同步
+     * @param array1 
+     * @param array2 
+     * @param compareFn 支持同异步function
+     */
+    ArrayEquals (array1 :Array, array2 : Array, compareFn?: Promise) : Promise
+    
+    /**
+     * 
+     * @param array 
+     * @param one 
+     * @param compareFn 
+     */
+    ArrayIndexOf (array : Array, one , compareFn ? : Promise)  : Promise
+
+
+    ArrayFilter(array : Array, one, compareFn? : Promise)  : Promise
+    
+    /**
+     * todo
+     * @param array 
+     * @param compareFn 
+     */
+    ArraySort (array : Array, compareFn ? : Promise) : Promise
+
+    /**
+     * todo
+     * @param array 
+     * @param compareFn 
+     */
+    ArrayDistinct(array : Array, compareFn ?: Promise) : Promise
+
+    ArrayRemove (array : Array, arrayOrOneRemoving, compareFn ? : Promise) :Promise
+}
+
 declare class Utils{
 
 
@@ -88,6 +134,11 @@ declare class Utils{
     ArrayFilter ( array : Array<any>,one : any, compareFn? :Function) : Array<any>
 
     deepCopy( obj : Object) :Object
+
+    /**
+     * 异步函数入口
+     */
+    Async : Async
 }
 
 

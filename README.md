@@ -1,10 +1,19 @@
 # LiSA.utils.js
 tiny utils for node
 
-
 ## use
-now use by github
+uitls so easy to use
 ```bash
-npm i --save https://github.com/apporoad/LiSA.utils.js.git
+npm i --save lisa.utils 
+```
+
+```js
+const utils = require('lisa.utils')
+const uType = utils.Type
+const atils = utils.Async
+
+console.log(uType.isArray([]))
+
+// more in index.d.ts
 
 ```
