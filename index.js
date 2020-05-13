@@ -20,6 +20,13 @@ var endWith = function (str, s) {
         return false;
 }
 
+const S4 = () => {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+}
+exports.guid = exports.uuid = () => {
+    return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+}
+
 exports.endTrim = (str, end) => {
     end = end || ' '
     var result = str
@@ -265,26 +272,26 @@ exports.deepCopy = (obj) => {
 
 
 var ArrayIndexOfAsync = async (array, one, compareFn) => {
-        for (var i = 0; i < array.length; i++) {
-            element = array[i]
-            if (compareFn) {
-                if (await Promise.resolve(compareFn(one, element))) {
-                    return i
-                }
-            } else {
-                if (one == element) {
-                    return i
-                }
+    for (var i = 0; i < array.length; i++) {
+        element = array[i]
+        if (compareFn) {
+            if (await Promise.resolve(compareFn(one, element))) {
+                return i
+            }
+        } else {
+            if (one == element) {
+                return i
             }
         }
-        return -1
     }
-var   ArrayContainsAsync = async (array, one, compareFn) => {
-        return (await ArrayIndexOfAsync(array, one, compareFn)) > -1
-    }
+    return -1
+}
+var ArrayContainsAsync = async (array, one, compareFn) => {
+    return (await ArrayIndexOfAsync(array, one, compareFn)) > -1
+}
 
 var Async = {
-    ArrayContains: ArrayContainsAsync ,
+    ArrayContains: ArrayContainsAsync,
     ArrayEquals: async (array1, array2, compareFn) => {
         if (array1.length != array2.length) {
             return false
@@ -304,7 +311,7 @@ var Async = {
         }
         return true
     },
-    ArrayIndexOf: ArrayIndexOfAsync ,
+    ArrayIndexOf: ArrayIndexOfAsync,
     ArrayFilter: async (array, one, compareFn) => {
         var newArr = []
         for (var i = 0; i < array.length; i++) {
@@ -330,7 +337,7 @@ var Async = {
         if (!exports.Type.isArray(arrayOrOneRemoving)) {
             arrayOrOneRemoving = [arrayOrOneRemoving]
         }
-        for(var i =0 ;i< array.length;i ++){
+        for (var i = 0; i < array.length; i++) {
             var element = array[i]
             if (!(await Promise.resolve(ArrayContainsAsync(arrayOrOneRemoving, element, compareFn)))) {
                 newArr.push(element)

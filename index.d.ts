@@ -87,7 +87,16 @@ declare class Utils{
      */
     endWith(originStr : string,endStr : string): boolean
 
+    /**
+     * 生成uuid
+     */
+    uuid():String
 
+    /**
+     * 生成guid
+     */
+    guid():String
+    
     /**
      * 
      * @param str 
