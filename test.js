@@ -50,13 +50,19 @@ it('test sort' , ()=>{
     expect(utils.ArraySort(array,(a,b)=>{ return a.id > b.id})[0].id).toBe(0)
 })
 
-it('test special' , ()=>{
+it2('test special' , ()=>{
     var json = {
-        abc : /asdfs/g
+        abc : /asdfs/g,
+        obj : [{
+            a : 2
+        }]
     }
     var cpJ = utils.deepCopy(json)
+    cpJ.obj[0].a =1
 
     expect(cpJ.abc == json.abc).toBe(true)
+
+    expect(cpJ.obj[0].a != json.obj[0].a).toBe(true)
 })
 
 // var afun = async (abc) =>{}
@@ -93,7 +99,7 @@ it('test special' , ()=>{
 // console.log(utils.ArrayRemove(arry3,[{ n :3},{n:2}],(a,b)=>{ return a.n == b.n}))
 
 
-it2('test async', async ()=>{
+it('test async', async ()=>{
     expect(await atils.ArrayContains(['a', { hello : 1} , 2] , 1 , async( one,two)=>{
         return Promise.resolve(utils.Type.isObject(two) && two.hello)
     })).toBeTruthy()
