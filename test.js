@@ -111,3 +111,12 @@ it('test async', async ()=>{
     //todo
     
 })
+
+
+it('test mkdirp' , async()=>{
+    var path = __dirname + '/test/test/test/'
+    utils.mkdirp(path)
+
+    expect( require('fs').existsSync(path)).toBe(true)
+
+})

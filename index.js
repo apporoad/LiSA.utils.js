@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 var Type = (function () {
     var type = {};
     var typeArr = ['String', 'Object', 'Number', 'Array', 'Undefined', 'Function', 'Null', 'Symbol', 'Boolean', 'RegExp', 'AsyncFunction'];
@@ -370,3 +371,13 @@ exports.rmrf = function (path) {
     }
 }
 
+exports.mkdirp = (dirname) => {
+    if (fs.existsSync(dirname)) {
+      return true;
+    } else {
+      if (exports.mkdirp(path.dirname(dirname))) {
+        fs.mkdirSync(dirname);
+        return true;
+      }
+    }
+  }

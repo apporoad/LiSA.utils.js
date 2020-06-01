@@ -154,6 +154,12 @@ declare class Utils{
      * @param path 
      */
     rmrf (path : String)
+
+    /**
+     * 创建多级文件夹
+     * @param dirname  
+     */
+    mkdirp(dirname :String) : Boolean
 }
 
 
