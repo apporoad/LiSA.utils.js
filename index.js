@@ -1,3 +1,4 @@
+const fs = require('fs')
 var Type = (function () {
     var type = {};
     var typeArr = ['String', 'Object', 'Number', 'Array', 'Undefined', 'Function', 'Null', 'Symbol', 'Boolean', 'RegExp', 'AsyncFunction'];
@@ -348,3 +349,24 @@ var Async = {
 }
 
 exports.Async = Async
+
+
+/**
+ * 删除文件夹
+ */
+exports.rmrf = function (path) {
+    var files = []
+    if (fs.existsSync(path)) {
+        files = fs.readdirSync(path);
+        files.forEach(function (file, index) {
+            var curPath = path + "/" + file;
+            if (fs.statSync(curPath).isDirectory()) { // recurse 
+                rmrf(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
+        })
+        fs.rmdirSync(path)
+    }
+}
+

@@ -148,6 +148,12 @@ declare class Utils{
      * 异步函数入口
      */
     Async : Async
+
+    /**
+     * 删除文件夹
+     * @param path 
+     */
+    rmrf (path : String)
 }
 
 
