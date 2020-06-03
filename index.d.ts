@@ -160,6 +160,13 @@ declare class Utils{
      * @param dirname  
      */
     mkdirp(dirname :String) : Boolean
+
+    /**
+     * 获取hash码
+     * @param obj
+     * @param caseSenseless 
+     */
+    hashCode  (obj , caseSenseless ? : Boolean) :String
 }
 
 

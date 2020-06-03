@@ -118,5 +118,10 @@ it('test mkdirp' , async()=>{
     utils.mkdirp(path)
 
     expect( require('fs').existsSync(path)).toBe(true)
+})
 
+it('test hash' , async()=>{
+    var a = /asdfsdf/g
+    var b = /asdfsdf/g
+    expect(utils.hashCode(a) == utils.hashCode(b)).toBe(true)
 })
