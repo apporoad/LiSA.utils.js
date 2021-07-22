@@ -14,6 +14,14 @@ var Type = (function () {
 })();
 
 var endWith = function (str, s) {
+    if(Type.isArray(s)){
+        for(var i=0;i<s.length;i++){
+            if(endWith(str,s[i])){
+                return true
+            }
+        }
+        return false
+    }
     if (s == null || s == "" || str.length == 0 || s.length > str.length)
         return false;
     if (str.substring(str.length - s.length) == s)
@@ -52,6 +60,15 @@ exports.endTrim = (str, end) => {
     return exports.endTrim(result, end)
 }
 var startWith = function (str, s) {
+    if(Type.isArray(s)){
+        for(var i=0;i<s.length;i++){
+            if(startWith(str,s[i])){
+                return true
+            }
+        }
+        return false
+    }
+
     if (s == null || s == "" || str == null || str == "" || str.length == 0 || s.length > str.length)
         return false;
     if (str.substr(0, s.length) == s)
@@ -396,4 +413,27 @@ exports.hashCode = (obj, caseSenseless) => {
         hash ^= ((hash << 5) + ch + (hash >> 2));
     }
     return (hash & 0x7FFFFFFF);
+}
+
+
+exports.joinPath = (...args) =>{
+    var realArray = args
+    if(args.length ==1){
+        if( !Type.isArray(args[0])){
+            return args[0]
+        }
+        else{
+            realArray = args[0]
+        }
+    }
+    var str = ''
+    for(var i =0; i<realArray.length;i++){
+        var newS = realArray[i]
+        str = exports.endTrim(str,['/','\\'])
+        newS = exports.startTrim(newS ,  ['/','\\'])
+        if(newS){
+            str =str ? (str + '/' + newS)  : newS
+        }
+    }
+    return str
 }

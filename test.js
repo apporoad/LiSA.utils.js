@@ -125,3 +125,10 @@ it('test hash' , async()=>{
     var b = /asdfsdf/g
     expect(utils.hashCode(a) == utils.hashCode(b)).toBe(true)
 })
+
+
+it('test joinPath' ,()=>{
+    var result = utils.joinPath('http://hello.com' , '/module1/' , 'module2/' , '/abc.html/') 
+    console.log(result)
+    expect(result== "http://hello.com/module1/module2/abc.html/").toBe(true)
+})

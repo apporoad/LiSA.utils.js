@@ -167,6 +167,12 @@ declare class Utils{
      * @param caseSenseless 
      */
     hashCode  (obj , caseSenseless ? : Boolean) :String
+
+    /**
+     * 拼接路径，支持http
+     * @param args 多参数方式，或者 数组方式
+     */
+    joinPath (...args ) : String
 }
 
 

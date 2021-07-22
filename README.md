@@ -14,6 +14,9 @@ const atils = utils.Async
 
 console.log(uType.isArray([]))
 
+
+utils.joinPath('http://hello.com' , '/module1/' , 'module2/' , '/abc.html/') 
+
 // more in index.d.ts
 
 ```
